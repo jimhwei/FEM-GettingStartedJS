@@ -7,40 +7,40 @@ function ask(question) {
 // Assigning the value what is closure
 var myQuestion = ask("What is closure?");
 
-// Still knows the ask content, because of "Closure" despite closure. Need to know more about closure. 
+// Still knows the ask content, because of "Closure" despite closure. Need to know more about closure.
 myQuestion();class Bookshelf {
 	constructor() {
 		this.favoriteBooks = [];
-	};
-  addFavoriteBook(bookName);
-  printFavoriteBooks()
-
-	// TODO: define methods `addFavoriteBook(..)`
-	// and `printFavoriteBooks()`
-}
-
-function addFavoriteBook(bookName) {
-	if (!bookName.includes("Great")) {
-		favoriteBooks.push(bookName);
 	}
+  addFavoriteBook(bookName) {
+  	if (!bookName.includes("Great")) {
+  		this.favoriteBooks.push(bookName);
+  	}
+  }
+
+  function printFavoriteBooks() {
+  	console.log(`Favorite Books: ${ String(this.favoriteBooks.length) }`); //string coercion makes you more aware about your types
+  	for (let bookName of favoriteBooks) {
+  		console.log(this.bookName);
+  	}
+  }
 }
 
-function printFavoriteBooks() {
-	console.log(`Favorite Books: ${String(favoriteBooks.length)}`);
-	for (let bookName of favoriteBooks) {
-		console.log(this.bookName);
-	}
-}
-
-function loadBooks(Bookshelf) {
-	fakeAjax(BOOK_API,
-          for (let i of cb) {
-    console.log(bookName)
+// The param is just a placeholder
+function loadBooks(theBookshelf) {
+  // Need an inline named function
+	fakeAjax(BOOK_API, function onBooks(bookNames){
+    for (let bookName of bookNames) {
+      theBookshelf.addFavoriteBook(bookName); //invoking in a diff context
+    }
+    theBookshelf.printFavoriteBooks();
   });
 }
 
 var BOOK_API = "https://some.url/api";
 
+var myBooks = new Bookshelf()
+loadBooks(myBooks)
 
 // ***********************
 
@@ -56,5 +56,3 @@ function fakeAjax(url,cb) {
 		]);
 	},500);
 }
-
-new Bookshelf(Whatever)
